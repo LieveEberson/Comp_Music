@@ -5,3 +5,6 @@ Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Wo
 This will start with a comparison of genre, which will be very different. The first thing that stood out to me is that one of the playlists contains a whole album, which is not like the other playlists. Unfortunately, I am in isolation with covid and cannot copy the playlists at my work this week. I will copy these this weekend and ellaborate on the details of the songs and artists.
 
 Another idea is to choose one part of the day, and compare the different playlists. This means the genre will be kind of the same, but with small differences in artists and songs. 
+
+FIRST PLOT
+For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference.

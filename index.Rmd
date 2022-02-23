@@ -5,16 +5,16 @@ date: "2/23/2022"
 output:
   flexdashboard::flex_dashboard:
     orientation: columns
-    vertical_layout: fill
     storyboard: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library(flexdashboard)
 library(tidyverse)
 library(plotly)
 library(spotifyr)
+library(ggplot2)
 
 ```
 
@@ -41,6 +41,75 @@ Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Wo
 ### First graph
 
 For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference between the parts of the day.
+
+```{r}
+lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
+rock_fissa <- get_playlist_audio_features("", "7fLp6h0KxTCnNWsbBpSWXi")
+bar_playlists <-
+  bind_rows(
+    lunch %>% mutate(category = "Lunch"),
+    rock_fissa %>% mutate(category = "Avond"))
+
+plot_1 <- bar_playlists %>% mutate(
+    mode = ifelse(mode == 0, "Minor", "Major")
+  ) %>%ggplot(                     
+    aes(
+      x = valence,
+      y = energy,
+      size = loudness,
+      colour = mode
+    )
+  ) +
+  geom_point() +              
+  geom_rug(size = 0.1) +      
+  geom_text(                  
+    aes(
+      x = valence,
+      y = energy,
+      label = label
+    ),
+    data = 
+      tibble(
+        label = c("", ""),
+        category = c("Avond", "Lunch"),
+        valence = c(0.090, 0.123),
+        energy = c(0.101, 0.967)
+      ),
+    colour = "black",        
+    size = 3,                
+    hjust = "left",          
+    vjust = "bottom",        
+    nudge_x = -0.05,          
+    nudge_y = 0.02            
+  ) +
+  facet_wrap(~category) +     
+  scale_x_continuous(         
+    limits = c(0, 1),
+    breaks = c(0, 0.50, 1),   
+    minor_breaks = NULL       
+  ) +
+  scale_y_continuous(         
+    limits = c(0, 1),
+    breaks = c(0, 0.50, 1),
+    minor_breaks = NULL
+  ) +
+  scale_colour_brewer(        
+    type = "qual",            
+    palette = "Paired"        
+  ) +
+  scale_size_continuous(      
+    trans = "exp",            
+    guide = "none"            
+  ) +
+  theme_light() +             
+  labs(                       
+    x = "Danceability",
+    y = "Energy",
+    colour = "Mode"
+  )
+
+ggplotly(plot_1)
+```
 
 # Conclusion
 

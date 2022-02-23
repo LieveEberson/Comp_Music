@@ -1,0 +1,44 @@
+---
+title: "Computational Musicology"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(flexdashboard)
+```
+Introduction
+=====================================
+
+Column {.tabset}
+-----------------------------------------------------------------------
+
+### Corpus Description
+
+```{r}
+
+```
+
+Visualisation
+=====================================
+Column {.tabset}
+-----------------------------------------------------------------------
+
+### First plot
+
+```{r}
+
+```
+
+Conclusion
+=====================================
+Column {.tabset}
+-----------------------------------------------------------------------
+### Conclusion
+
+```{r}
+
+```
+

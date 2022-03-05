@@ -18,12 +18,13 @@ library(ggplot2)
 
 ```
 
-
+# Chromagrams
 
 # Introduction
+
 hallo
 
-## Column 1 {data-width = 650}
+## Column 2 {data-width = 650}
 
 ### Corpus
 

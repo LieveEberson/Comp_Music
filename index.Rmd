@@ -15,6 +15,7 @@ library(tidyverse)
 library(plotly)
 library(spotifyr)
 library(ggplot2)
+library(compmus)
 
 ```
 
@@ -24,9 +25,9 @@ library(ggplot2)
 
 ### lunch playlist
 
-```{r hazes}
+```{r}
 bzt <-
-  get_tidy_audio_analysis("15XTzdCk80I6KrHwrRgR0L") %>%
+  get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
   compmus_align(bars, segments) %>%
   select(bars) %>%
   unnest(bars) %>%
@@ -74,9 +75,9 @@ bind_rows(
 
 ### evening playlist
 
-```{r hazes}
+```{r}
 bzt <-
-  get_tidy_audio_analysis("7fLp6h0KxTCnNWsbBpSWXi") %>%
+  get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   compmus_align(bars, segments) %>%
   select(bars) %>%
   unnest(bars) %>%

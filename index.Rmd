@@ -16,6 +16,10 @@ library(plotly)
 library(spotifyr)
 library(ggplot2)
 library(compmus)
+library(devtools)
+library(tidymodels)
+library(heatmaply)
+library(protoclust)
 
 ```
 
@@ -340,6 +344,59 @@ get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "", fill = "Distance")
 ```
+
+# Dendogram
+
+```{r olifant}
+olifant <- 
+    get_playlist_audio_features('bnfcollection', '15XTzdCk80I6KrHwrRgR0L') %>% 
+    add_audio_analysis %>% 
+    mutate(
+        segments = 
+            map2(segments, key, compmus_c_transpose)) %>% 
+    mutate(
+        pitches = 
+            map(segments, 
+                compmus_summarise, pitches, 
+                method = 'mean', norm = 'manhattan'),
+        timbre =
+            map(
+                segments,
+                compmus_summarise, timbre,
+                method = 'mean')) %>% 
+    mutate(pitches = map(pitches, compmus_normalise, 'clr')) %>% 
+    mutate_at(vars(pitches, timbre), map, bind_rows) %>% 
+    unnest(cols = c(pitches, timbre))
+olifant_juice <- 
+    recipe(track.name ~
+               danceability +
+               energy +
+               loudness +
+               speechiness +
+               acousticness +
+               instrumentalness +
+               liveness +
+               valence +
+               tempo +
+               duration +
+               C + `C#|Db` + D + `D#|Eb` +
+               E + `F` + `F#|Gb` + G +
+               `G#|Ab` + A + `A#|Bb` + B +
+               c01 + c02 + c03 + c04 + c05 + c06 +
+               c07 + c08 + c09 + c10 + c11 + c12,
+           data = olifant) %>% 
+    step_range(all_predictors()) %>% 
+    prep(olifant %>% mutate(track.name = str_trunc(track.name, 20))) %>% 
+    juice %>% 
+    column_to_rownames('track.name')
+ggheatmap(
+    olifant_juice,
+    hclustfun = protoclust,
+    dist_method = 'manhattan'
+)
+```
+
+This dendogram is made with the lunch playlist. In the dendogram you can see that there are several clusters to be found. However, due to the large amount of data it is not very readable yet. I am thinking of reducing the number of songs used. Maybe by creating a playlist with songs from both lunch as evening playlists. In this way, I could maybe use the dendogram to see if based on features, the songs from the same playlists are clustered together.
 
 # Conclusion
 

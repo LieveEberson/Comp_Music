@@ -22,6 +22,103 @@ library(heatmaply)
 library(protoclust)
 
 ```
+# Introduction
+
+## Column 1 {data-width = 650}
+
+### Corpus
+
+Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Working in a cafe myself, I use a lot of spotify playlists. In this cafe we have different playlists for different moments of the day. For my corpus in this research I chose our lunchtime and dinnertime playlists. I want to find out what aspects of this music makes them more enjoyable on different parts of the day. For this I will compare these two playlists with each other. Beforehand, I would expect differences mostly in the tempo and energy of the tracks.  
+
+- beschrijven van verschillen tussen playists. En verwachte verschillen.
+
+To investigate the differences I make use of a variation of visualisations and spotify features. First I will visualize track-level features for songs in both playlists. Secondly I will analyse the chroma features of both playlists by using chromagrams. 
+
+
+## Column 2 {data-width = 350}
+
+### Volgende
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7fx9x4iegCA43TmBIKdvGn?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+
+# Visualisation
+
+## Column 1
+
+### First graph
+
+For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference between the parts of the day.
+
+```{r}
+lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
+rock_fissa <- get_playlist_audio_features("", "7fLp6h0KxTCnNWsbBpSWXi")
+bar_playlists <-
+  bind_rows(
+    lunch %>% mutate(category = "Lunch"),
+    rock_fissa %>% mutate(category = "Avond"))
+
+plot_1 <- bar_playlists %>% mutate(
+    mode = ifelse(mode == 0, "Minor", "Major")
+  ) %>%ggplot(                     
+    aes(
+      x = valence,
+      y = energy,
+      size = loudness,
+      colour = mode
+    )
+  ) +
+  geom_point() +              
+  geom_rug(size = 0.1) +      
+  geom_text(                  
+    aes(
+      x = valence,
+      y = energy,
+      label = label
+    ),
+    data = 
+      tibble(
+        label = c("", ""),
+        category = c("Avond", "Lunch"),
+        valence = c(0.090, 0.123),
+        energy = c(0.101, 0.967)
+      ),
+    colour = "black",        
+    size = 3,                
+    hjust = "left",          
+    vjust = "bottom",        
+    nudge_x = -0.05,          
+    nudge_y = 0.02            
+  ) +
+  facet_wrap(~category) +     
+  scale_x_continuous(         
+    limits = c(0, 1),
+    breaks = c(0, 0.50, 1),   
+    minor_breaks = NULL       
+  ) +
+  scale_y_continuous(         
+    limits = c(0, 1),
+    breaks = c(0, 0.50, 1),
+    minor_breaks = NULL
+  ) +
+  scale_colour_brewer(        
+    type = "qual",            
+    palette = "Paired"        
+  ) +
+  scale_size_continuous(      
+    trans = "exp",            
+    guide = "none"            
+  ) +
+  theme_light() +             
+  labs(                       
+    x = "Danceability",
+    y = "Energy",
+    colour = "Mode"
+  )
+
+ggplotly(plot_1)
+```
+
 
 # Chromagrams
 
@@ -127,99 +224,13 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-# Introduction
+# Loudness
 
-hallo
+# Timbre
 
-## Column 2 {data-width = 650}
+# Tempo
 
-### Corpus
-
-Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Working in a cafe myself, I use a lot of spotify playlists. During the day it will be in the trend of 'Coffee House', in the evening more jazz and in the late hours a rock party. I want to find out what aspects of this music makes them more enjoyable on different parts of the day. For this I will use the playlists we play at my work and compare these with each other. This will start with a comparison of genre, which will be very different. The first thing that stood out to me is that one of the playlists contains a whole album, which is not like the other playlists.
-
-## Column 2 {data-width = 350}
-
-### Volgende
-
-
-# Visualisation
-
-## Column 1
-
-### First graph
-
-For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference between the parts of the day.
-
-```{r}
-lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
-rock_fissa <- get_playlist_audio_features("", "7fLp6h0KxTCnNWsbBpSWXi")
-bar_playlists <-
-  bind_rows(
-    lunch %>% mutate(category = "Lunch"),
-    rock_fissa %>% mutate(category = "Avond"))
-
-plot_1 <- bar_playlists %>% mutate(
-    mode = ifelse(mode == 0, "Minor", "Major")
-  ) %>%ggplot(                     
-    aes(
-      x = valence,
-      y = energy,
-      size = loudness,
-      colour = mode
-    )
-  ) +
-  geom_point() +              
-  geom_rug(size = 0.1) +      
-  geom_text(                  
-    aes(
-      x = valence,
-      y = energy,
-      label = label
-    ),
-    data = 
-      tibble(
-        label = c("", ""),
-        category = c("Avond", "Lunch"),
-        valence = c(0.090, 0.123),
-        energy = c(0.101, 0.967)
-      ),
-    colour = "black",        
-    size = 3,                
-    hjust = "left",          
-    vjust = "bottom",        
-    nudge_x = -0.05,          
-    nudge_y = 0.02            
-  ) +
-  facet_wrap(~category) +     
-  scale_x_continuous(         
-    limits = c(0, 1),
-    breaks = c(0, 0.50, 1),   
-    minor_breaks = NULL       
-  ) +
-  scale_y_continuous(         
-    limits = c(0, 1),
-    breaks = c(0, 0.50, 1),
-    minor_breaks = NULL
-  ) +
-  scale_colour_brewer(        
-    type = "qual",            
-    palette = "Paired"        
-  ) +
-  scale_size_continuous(      
-    trans = "exp",            
-    guide = "none"            
-  ) +
-  theme_light() +             
-  labs(                       
-    x = "Danceability",
-    y = "Energy",
-    colour = "Mode"
-  )
-
-ggplotly(plot_1)
-```
-
-# Visualisation 2 (hw week 10)
+# Hw week 10 - what is this
 
 For these visualizations I chose two songs that are very representative for the playlists. I think you see very good that in the evening playlist, there is a lot more variation in the keys used. This could be explained by the lunch playlist being more calm and equal, so also the difference in keys being more equal.
 
@@ -347,6 +358,10 @@ get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
 
 # Dendogram
 
+## Column graph
+
+### Graph
+
 ```{r olifant}
 olifant <- 
     get_playlist_audio_features('bnfcollection', '15XTzdCk80I6KrHwrRgR0L') %>% 
@@ -395,6 +410,10 @@ ggheatmap(
     dist_method = 'manhattan'
 )
 ```
+
+## Column explanation
+
+### Explanation
 
 This dendogram is made with the lunch playlist. In the dendogram you can see that there are several clusters to be found. However, due to the large amount of data it is not very readable yet. I am thinking of reducing the number of songs used. Maybe by creating a playlist with songs from both lunch as evening playlists. In this way, I could maybe use the dendogram to see if based on features, the songs from the same playlists are clustered together.
 

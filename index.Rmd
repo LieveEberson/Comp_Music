@@ -53,6 +53,8 @@ To investigate the differences I make use of a variation of visualisations and s
 
 For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference between the parts of the day.
 
+***
+
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
 dinner <- get_playlist_audio_features("", "7fx9x4iegCA43TmBIKdvGn")
@@ -125,8 +127,8 @@ ggplotly(plot_1)
 
 ### Chromagrams
 
-```{r}
-bzt <-
+```{r lunch}
+bzt_lunch <-
   get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
   compmus_align(bars, segments) %>%
   select(bars) %>%
@@ -146,10 +148,10 @@ bzt <-
       )
   )
 bind_rows(
-  bzt %>% 
+  bzt_lunch %>% 
     compmus_self_similarity(pitches, "aitchison") %>% 
     mutate(d = d / max(d), type = "Chroma"),
-  bzt %>% 
+  bzt_lunch %>% 
     compmus_self_similarity(timbre, "euclidean") %>% 
     mutate(d = d / max(d), type = "Timbre")
 ) %>%
@@ -171,9 +173,8 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-
-```{r}
-bzt <-
+```{r dinner}
+bzt_dinner <-
   get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   compmus_align(bars, segments) %>%
   select(bars) %>%
@@ -193,10 +194,10 @@ bzt <-
       )
   )
 bind_rows(
-  bzt %>% 
+  bzt_dinner %>% 
     compmus_self_similarity(pitches, "aitchison") %>% 
     mutate(d = d / max(d), type = "Chroma"),
-  bzt %>% 
+  bzt_dinner %>% 
     compmus_self_similarity(timbre, "euclidean") %>% 
     mutate(d = d / max(d), type = "Timbre")
 ) %>%
@@ -218,17 +219,15 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-#### Column 2 - explanation
+***
+
+Explanation
 
 I think this shows that timbre is bla bla and chroma bla bla bla.
 
 ### Loudness
 
 Nog bedenken
-
-### Timbre
-
-Nog bedenken - bij chromagram
 
 ### Tempo
 
@@ -248,18 +247,13 @@ ggplot(data = dinner, mapping = aes(x = tempo)) +
     ggtitle("Dinner")
 ```
 
-#### Explanation
+***
+
+Explanation
 
 You can see that the tempo bla bla bla
 
 ### Keygrams
-
-#### text
-For these visualizations I chose two songs that are very representative for the playlists. 
-
-- which ones and why?
-
-I think you see very good that in the evening playlist, there is a lot more variation in the keys used. This could be explained by the lunch playlist being more calm and equal, so also the difference in keys being more equal.
 
 #### lunch playlist
 
@@ -380,6 +374,14 @@ get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   labs(x = "Time (s)", y = "", fill = "Distance")
 ```
 
+***
+
+For these visualizations I chose two songs that are very representative for the playlists. 
+
+- which ones and why?
+
+I think you see very good that in the evening playlist, there is a lot more variation in the keys used. This could be explained by the lunch playlist being more calm and equal, so also the difference in keys being more equal.
+
 ### Dendogram
 
 ```{r olifant}
@@ -431,8 +433,9 @@ ggheatmap(
 )
 ```
 
+***
 
-#### Explanation
+Explanation
 
 This dendogram is made with the lunch playlist. In the dendogram you can see that there are several clusters to be found. However, due to the large amount of data it is not very readable yet. I am thinking of reducing the number of songs used. Maybe by creating a playlist with songs from both lunch as evening playlists. In this way, I could maybe use the dendogram to see if based on features, the songs from the same playlists are clustered together.
 

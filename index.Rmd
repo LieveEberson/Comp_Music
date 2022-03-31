@@ -125,10 +125,6 @@ ggplotly(plot_1)
 
 ### Chromagrams
 
-Column 1 {data-width = 600}
----------------------------------
-##### Lunch playlist
-
 ```{r}
 bzt <-
   get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
@@ -176,8 +172,6 @@ bind_rows(
 ```
 
 
-##### Dinner playlist
-
 ```{r}
 bzt <-
   get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
@@ -224,10 +218,7 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-Column 2 {data-width = 400}
-----------------------------------
-
-##### Column 2 - explanation
+#### Column 2 - explanation
 
 I think this shows that timbre is bla bla and chroma bla bla bla.
 
@@ -237,11 +228,9 @@ Nog bedenken
 
 ### Timbre
 
-Nog bedenken
+Nog bedenken - bij chromagram
 
 ### Tempo
-
-Tempograms lopen vast?
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
@@ -259,9 +248,13 @@ ggplot(data = dinner, mapping = aes(x = tempo)) +
     ggtitle("Dinner")
 ```
 
+#### Explanation
+
+You can see that the tempo bla bla bla
 
 ### Keygrams
 
+#### text
 For these visualizations I chose two songs that are very representative for the playlists. 
 
 - which ones and why?
@@ -388,8 +381,6 @@ get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
 ```
 
 ### Dendogram
-
-#### Dinner
 
 ```{r olifant}
 olifant <- 

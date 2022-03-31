@@ -47,9 +47,7 @@ To investigate the differences I make use of a variation of visualisations and s
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7fx9x4iegCA43TmBIKdvGn?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
-# Feature visualisation
-
-## Column 1
+# Feature visualisation {.storyboard}
 
 ### First graph
 
@@ -125,11 +123,9 @@ ggplotly(plot_1)
 ```
 
 
-# Chromagrams
+### Chromagrams
 
-## Column graphs
-
-### Lunch playlist
+#### Lunch playlist
 
 ```{r}
 bzt <-
@@ -178,7 +174,7 @@ bind_rows(
 ```
 
 
-### Dinner playlist
+#### Dinner playlist
 
 ```{r}
 bzt <-
@@ -226,15 +222,13 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-## Column 2 - explanation
+#### Column 2 - explanation
 
-### Text
+### Loudness
 
-# Loudness
+### Timbre
 
-# Timbre
-
-# Tempo
+### Tempo
 
 Tempograms lopen vast?
 
@@ -243,12 +237,19 @@ lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
 
 ggplot(data = lunch, mapping = aes(x = tempo)) +
     geom_histogram(aes(fill = mode)) +
-    facet_wrap(~ mode)
+    facet_wrap(~ mode) +
+    ggtitle("Lunch")
 
+dinner <- get_playlist_audio_features("","7fx9x4iegCA43TmBIKdvGn")
+
+ggplot(data = dinner, mapping = aes(x = tempo)) +
+    geom_histogram(aes(fill = mode)) +
+    facet_wrap(~ mode) +
+    ggtitle("Dinner")
 ```
 
 
-# Keygrams
+### Keygrams
 
 For these visualizations I chose two songs that are very representative for the playlists. 
 
@@ -256,7 +257,7 @@ For these visualizations I chose two songs that are very representative for the 
 
 I think you see very good that in the evening playlist, there is a lot more variation in the keys used. This could be explained by the lunch playlist being more calm and equal, so also the difference in keys being more equal.
 
-### lunch playlist
+#### lunch playlist
 
 ```{r}
 circshift <- function(v, n) {
@@ -315,9 +316,8 @@ get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
   labs(x = "Time (s)", y = "", fill = "Distance")
 ```
 
-## evening playlist
 
-### Evening playlist
+#### Evening playlist
 
 ```{r}
 circshift <- function(v, n) {
@@ -376,11 +376,9 @@ get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   labs(x = "Time (s)", y = "", fill = "Distance")
 ```
 
-# Dendogram
+### Dendogram
 
-## Column graph
-
-### Graph
+#### Dinner
 
 ```{r olifant}
 olifant <- 
@@ -431,9 +429,8 @@ ggheatmap(
 )
 ```
 
-## Column explanation
 
-### Explanation
+#### Explanation
 
 This dendogram is made with the lunch playlist. In the dendogram you can see that there are several clusters to be found. However, due to the large amount of data it is not very readable yet. I am thinking of reducing the number of songs used. Maybe by creating a playlist with songs from both lunch as evening playlists. In this way, I could maybe use the dendogram to see if based on features, the songs from the same playlists are clustered together.
 

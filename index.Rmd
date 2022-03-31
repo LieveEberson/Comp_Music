@@ -57,11 +57,11 @@ For the first plot, I put danceability and energy on the axes. I thought these w
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
-rock_fissa <- get_playlist_audio_features("", "7fx9x4iegCA43TmBIKdvGn")
+dinner <- get_playlist_audio_features("", "7fx9x4iegCA43TmBIKdvGn")
 bar_playlists <-
   bind_rows(
     lunch %>% mutate(category = "Lunch"),
-    rock_fissa %>% mutate(category = "Avond"))
+    dinner %>% mutate(category = "Dinner"))
 
 plot_1 <- bar_playlists %>% mutate(
     mode = ifelse(mode == 0, "Minor", "Major")
@@ -84,7 +84,7 @@ plot_1 <- bar_playlists %>% mutate(
     data = 
       tibble(
         label = c("", ""),
-        category = c("Avond", "Lunch"),
+        category = c("Dinner", "Lunch"),
         valence = c(0.090, 0.123),
         energy = c(0.101, 0.967)
       ),
@@ -116,7 +116,7 @@ plot_1 <- bar_playlists %>% mutate(
   ) +
   theme_light() +             
   labs(                       
-    x = "Danceability",
+    x = "Valence",
     y = "Energy",
     colour = "Mode"
   )
@@ -237,6 +237,15 @@ bind_rows(
 # Tempo
 
 Tempograms lopen vast?
+
+```{r}
+lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
+
+ggplot(data = lunch, mapping = aes(x = tempo)) +
+    geom_histogram(aes(fill = mode)) +
+    facet_wrap(~ mode)
+
+```
 
 
 # Keygrams

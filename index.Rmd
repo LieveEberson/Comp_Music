@@ -125,7 +125,9 @@ ggplotly(plot_1)
 
 ### Chromagrams
 
-#### Lunch playlist
+Column 1 {data-width = 600}
+---------------------------------
+##### Lunch playlist
 
 ```{r}
 bzt <-
@@ -174,7 +176,7 @@ bind_rows(
 ```
 
 
-#### Dinner playlist
+##### Dinner playlist
 
 ```{r}
 bzt <-
@@ -222,11 +224,20 @@ bind_rows(
   labs(x = "", y = "")
 ```
 
-#### Column 2 - explanation
+Column 2 {data-width = 400}
+----------------------------------
+
+##### Column 2 - explanation
+
+I think this shows that timbre is bla bla and chroma bla bla bla.
 
 ### Loudness
 
+Nog bedenken
+
 ### Timbre
+
+Nog bedenken
 
 ### Tempo
 

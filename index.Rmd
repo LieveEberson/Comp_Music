@@ -146,7 +146,7 @@ bzt_lunch <-
         method = "mean"
       )
   )
-bind_rows(
+chroma_lunch <- bind_rows(
   bzt_lunch %>% 
     compmus_self_similarity(pitches, "aitchison") %>% 
     mutate(d = d / max(d), type = "Chroma"),
@@ -170,9 +170,7 @@ bind_rows(
   scale_fill_viridis_c(option = "E", guide = "none") +
   theme_classic() + 
   labs(x = "", y = "")
-```
 
-```{r dinner}
 bzt_dinner <-
   get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   compmus_align(bars, segments) %>%
@@ -192,7 +190,7 @@ bzt_dinner <-
         method = "mean"
       )
   )
-bind_rows(
+chroma_dinner <- bind_rows(
   bzt_dinner %>% 
     compmus_self_similarity(pitches, "aitchison") %>% 
     mutate(d = d / max(d), type = "Chroma"),
@@ -216,6 +214,10 @@ bind_rows(
   scale_fill_viridis_c(option = "E", guide = "none") +
   theme_classic() + 
   labs(x = "", y = "")
+
+ggarrange(chroma_lunch, chroma_dinner, 
+          labels = c("Lunch", "Dinner"),
+          ncol = 1, nrow = 2)
 ```
 
 ***
@@ -296,7 +298,7 @@ key_templates <-
     "B:maj", circshift(major_key, 11),
     "D#:min", circshift(minor_key, 3)
   )
-get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
+keygram_lunch <- get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
   compmus_align(sections, segments) %>%
   select(sections) %>%
   unnest(sections) %>%
@@ -315,12 +317,7 @@ get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
   scale_fill_viridis_c(option = "E", guide = "none") +
   theme_minimal() +
   labs(x = "Time (s)", y = "", fill = "Distance")
-```
 
-
-#### Evening playlist
-
-```{r}
 circshift <- function(v, n) {
   if (n == 0) v else c(tail(v, n), head(v, -n))
 }
@@ -356,7 +353,7 @@ key_templates <-
     "B:maj", circshift(major_key, 11),
     "D#:min", circshift(minor_key, 3)
   )
-get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
+keygram_dinner <- get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   compmus_align(sections, segments) %>%
   select(sections) %>%
   unnest(sections) %>%
@@ -375,6 +372,11 @@ get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   scale_fill_viridis_c(option = "E", guide = "none") +
   theme_minimal() +
   labs(x = "Time (s)", y = "", fill = "Distance")
+
+ggarrange(keygram_lunch, keygram_dinner, 
+          labels = c("Lunch", "Dinner"),
+          ncol = 1, nrow = 2)
+
 ```
 
 ***

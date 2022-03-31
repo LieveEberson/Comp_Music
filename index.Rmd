@@ -21,7 +21,7 @@ library(devtools)
 library(tidymodels)
 library(heatmaply)
 library(protoclust)
-
+library(ggpubr)
 ```
 # Introduction
 
@@ -50,10 +50,6 @@ To investigate the differences I make use of a variation of visualisations and s
 # Feature visualisation {.storyboard}
 
 ### First graph
-
-For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference between the parts of the day.
-
-***
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
@@ -124,6 +120,9 @@ plot_1 <- bar_playlists %>% mutate(
 ggplotly(plot_1)
 ```
 
+***
+
+For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference between the parts of the day.
 
 ### Chromagrams
 
@@ -234,17 +233,21 @@ Nog bedenken
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
 
-ggplot(data = lunch, mapping = aes(x = tempo)) +
+lunch_tempo <- ggplot(data = lunch, mapping = aes(x = tempo)) +
     geom_histogram(aes(fill = mode)) +
     facet_wrap(~ mode) +
     ggtitle("Lunch")
 
 dinner <- get_playlist_audio_features("","7fx9x4iegCA43TmBIKdvGn")
 
-ggplot(data = dinner, mapping = aes(x = tempo)) +
+dinner_tempo <- ggplot(data = dinner, mapping = aes(x = tempo)) +
     geom_histogram(aes(fill = mode)) +
     facet_wrap(~ mode) +
     ggtitle("Dinner")
+
+ggarrange(lunch_tempo, dinner_tempo, 
+          labels = c("Lunch", "Dinner"),
+          ncol = 2, nrow = 1)
 ```
 
 ***

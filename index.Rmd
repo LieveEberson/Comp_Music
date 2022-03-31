@@ -237,15 +237,13 @@ lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
 
 lunch_tempo <- ggplot(data = lunch, mapping = aes(x = tempo)) +
     geom_histogram(aes(fill = mode)) +
-    facet_wrap(~ mode) +
-    ggtitle("Lunch")
+    facet_wrap(~ mode)
 
 dinner <- get_playlist_audio_features("","7fx9x4iegCA43TmBIKdvGn")
 
 dinner_tempo <- ggplot(data = dinner, mapping = aes(x = tempo)) +
     geom_histogram(aes(fill = mode)) +
-    facet_wrap(~ mode) +
-    ggtitle("Dinner")
+    facet_wrap(~ mode)
 
 ggarrange(lunch_tempo, dinner_tempo, 
           labels = c("Lunch", "Dinner"),
@@ -259,8 +257,6 @@ Explanation
 You can see that the tempo bla bla bla
 
 ### Keygrams
-
-#### lunch playlist
 
 ```{r}
 circshift <- function(v, n) {

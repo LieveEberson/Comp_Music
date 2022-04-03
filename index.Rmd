@@ -49,7 +49,7 @@ To investigate the differences I make use of a variation of visualisations and s
 
 # Analysis {.storyboard}
 
-### Energy and valence
+### Comparing energy, valence and loudness
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
@@ -126,7 +126,7 @@ For the first plot, I put valence and energy on the axes. The size of the dots r
 
 Also in the size of the dots there is a big difference. The dots of the lunch playlist are almost all relatively small, where the dots of the evening playlists are more divided. But, you can see that the loudness in the evening playlist seems to be higher. These three track based features show that the evening playlist scores higher in valence, energy and loudness. These were results I expected, because they fit in with the atmossphere created in a restaurants at these times of day. During lunch it is nice to have calmer, more quiet atmossphere. In the evening people like to be more energised and ready for the night ahead. For the next part I want to investigate chroma and timbre based features.
 
-### Chromagrams distinct tracks
+### Evaluating self-similarity for chroma and timbre features
 
 ```{r lunch}
 bzt_lunch <-
@@ -226,9 +226,9 @@ ggarrange(chroma_lunch, chroma_dinner,
 
 In these plots you can see chroma and timbre based features for a song of both playlists. I wanted to pick a random track, because the research is about the playlists in general. So all tracks are a representation of the atmosphere created by the playlist. I chose for both playlists the 5th track of the playlist. For the lunch playlist this is 'At last' from Etta James, for the evening playlist this is 'Doom and Gloom' from The Rolling Stones.
 
-### Loudness
+For 'At last' the chroma based matrix does not show distinct changes. The timbre based matrix shows one distinct moment at 140-150. Listening to the song you can hear that the piano is very repetitive during the song. At this moment however, the piano uses a different melody. For 'Doom and Gloom' the chroma based matrix again is hard to read for distinct changes. However, the timbre based matrix shows several clear moments where the music changes. This is at 60 and 150. At 60, there is a short guitar solo. At 150, after a period of instrumental music the singing starts again, but all instruments except the drums stop playing. 
 
-Nog bedenken
+Altough these matrices may not show a lot of difference between the playlists, the instruments used do seem distinctive to me. The piano suits better with calmer, softer music as we saw in the lunch playlist on the previous page. The drums suit better with energetic, louder music like we saw in the evening playlist. However, all instruments fit with different tempos. That is why in the next part I am looking at the tempo of the playlists.
 
 ### Difference in tempo
 

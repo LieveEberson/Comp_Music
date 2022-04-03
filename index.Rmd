@@ -44,7 +44,7 @@ To investigate the differences I make use of a variation of visualisations and s
 
 ### Dinner
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7fx9x4iegCA43TmBIKdvGn?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7fLp6h0KxTCnNWsbBpSWXi?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
 # Analysis {.storyboard}
@@ -239,22 +239,22 @@ lunch_tempo <- ggplot(data = lunch, mapping = aes(x = tempo)) +
     geom_histogram(aes(fill = mode)) +
     facet_wrap(~ mode)
 
-dinner <- get_playlist_audio_features("","7fx9x4iegCA43TmBIKdvGn")
+dinner <- get_playlist_audio_features("","7fLp6h0KxTCnNWsbBpSWXi")
 
 dinner_tempo <- ggplot(data = dinner, mapping = aes(x = tempo)) +
     geom_histogram(aes(fill = mode)) +
     facet_wrap(~ mode)
 
 ggarrange(lunch_tempo, dinner_tempo, 
-          labels = c("Lunch", "Dinner"),
+          labels = c("Lunch", "Evening"),
           ncol = 2, nrow = 1)
 ```
 
 ***
 
-Explanation
+The histograms show the tempo of the tracks of the playlists for minor and major. You can see that in the evening playlist the tracks are predominantly in major. This fits with the findings regarding valence. The tracks are expected to be more positive and a major key is happier than a minor key. For the lunch playlist the tracks are more evenly divided, which corresponds with the findings regarding valence as well. 
 
-You can see that the tempo bla bla bla
+Tempo of the lunch playlist is found mostly around 100 bpm. The tempo of the evening playlist pushes it more to 140 bpm. This shows that the tempo of the tracks of the evening playlist seem to be generally higher than the lunch playlist. I think this fits well with the atmosspere during these times of day. When eating lunch, it is not nice to feel rushed. A lower tempo is more suitable. During the evening when having a beer, it is nice to get more hyped up and stay awake. A higher tempo supports this better. For the next part ??.
 
 ### Keygrams
 

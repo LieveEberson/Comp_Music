@@ -7,6 +7,9 @@ output:
     orientation: columns
     storyboard: true
     self_contained: false
+    theme:
+      bg: "#99eedf"
+      fg: "#008970"
 ---
 
 ```{r setup, include=FALSE}
@@ -294,7 +297,7 @@ key_templates <-
     "B:maj", circshift(major_key, 11),
     "D#:min", circshift(minor_key, 3)
   )
-keygram_lunch <- get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
+keygram_lunch <- get_tidy_audio_analysis("1cuVNVugfiBag4geicsJZA") %>%
   compmus_align(sections, segments) %>%
   select(sections) %>%
   unnest(sections) %>%
@@ -349,7 +352,7 @@ key_templates <-
     "B:maj", circshift(major_key, 11),
     "D#:min", circshift(minor_key, 3)
   )
-keygram_dinner <- get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
+keygram_dinner <- get_tidy_audio_analysis("1EXrFPfVNVsyb32yapebbM") %>%
   compmus_align(sections, segments) %>%
   select(sections) %>%
   unnest(sections) %>%
@@ -370,18 +373,17 @@ keygram_dinner <- get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
   labs(x = "Time (s)", y = "", fill = "Distance")
 
 ggarrange(keygram_lunch, keygram_dinner, 
-          labels = c("Lunch", "Dinner"),
+          labels = c("Lunch", "Evening"),
           ncol = 1, nrow = 2)
 
 ```
 
 ***
 
-For these visualizations I chose two songs that are very representative for the playlists. 
+For these visualizations I chose again two random tracks. This time I picked the track 5th from the bottom. For the lunch playlist this is 'Window Seat' from Erykah Badu. For the evening playlist this is 'Our House' from Madness, however this track is 8 minutes long. So for practicality I picked the 6th track. 
 
-- which ones and why?
+Uitleg keygrams.
 
-I think you see very good that in the evening playlist, there is a lot more variation in the keys used. This could be explained by the lunch playlist being more calm and equal, so also the difference in keys being more equal.
 
 ### Dendogram for the lunch playlist
 
@@ -436,10 +438,10 @@ ggheatmap(
 
 ***
 
-Explanation
+For this dendogram I created an extra playlist. In this playlist I combined tracks from both playlist, 10 tracks of each. I want to investigate if these tracks will be clustered with tracks from the same playlist.
 
-This dendogram is made with the lunch playlist. In the dendogram you can see that there are several clusters to be found. However, due to the large amount of data it is not very readable yet. I am thinking of reducing the number of songs used. Maybe by creating a playlist with songs from both lunch as evening playlists. In this way, I could maybe use the dendogram to see if based on features, the songs from the same playlists are clustered together.
+Uitleg dendogram.
 
 # Conclusion
 
-
+Wie heeft er baat bij: handvatten om de beste playlists te kunnnen maken voor momenten op de dag.

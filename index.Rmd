@@ -29,7 +29,7 @@ library(ggpubr)
 
 ### Corpus
 
-Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Working in a cafe myself, I use a lot of spotify playlists. In this cafe we have different playlists for different moments of the day. For my corpus in this research I chose our lunchtime and dinnertime playlists. I want to find out what aspects of this music makes them more enjoyable on different parts of the day. For this I will compare these two playlists with each other. Beforehand, I would expect differences mostly in the tempo and energy of the tracks.  
+Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Working in a cafe myself, I use a lot of spotify playlists. In this cafe we have different playlists for different moments of the day. For my corpus in this research I chose our lunchtime and after dinnertime playlists. I want to find out what aspects of this music makes them more enjoyable on different parts of the day. For this I will compare these two playlists with each other. Beforehand, I would expect differences mostly in the tempo and energy of the tracks. Looking at valence, I would expect more neutral or a bit more negative songs for the lunch playlists. For the evening playlist I would expect the songs to be a bit more positive, because during this time people are drinking more alcohol and maybe going to a party afterwards.
 
 - beschrijven van verschillen tussen playists. En verwachte verschillen.
 
@@ -47,13 +47,13 @@ To investigate the differences I make use of a variation of visualisations and s
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7fx9x4iegCA43TmBIKdvGn?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
-# Feature visualisation {.storyboard}
+# Analysis {.storyboard}
 
-### First graph
+### Energy and valence
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
-dinner <- get_playlist_audio_features("", "7fx9x4iegCA43TmBIKdvGn")
+dinner <- get_playlist_audio_features("", "7fLp6h0KxTCnNWsbBpSWXi")
 bar_playlists <-
   bind_rows(
     lunch %>% mutate(category = "Lunch"),
@@ -122,9 +122,11 @@ ggplotly(plot_1)
 
 ***
 
-For the first plot, I put danceability and energy on the axes. I thought these were two good features to see the difference between the parts of the day.
+For the first plot, I put valence and energy on the axes. The size of the dots represent the loudness of the tracks. In the plot you can see that the tracks of the evening playlist are predominantly higher in energy, as I expected. The valence is also higher, so closer to the value 1. This means that the track are more positively in their nature. The lunch playlist is very linearly divided. In this playlist it seems that there is a connection between valence and energy. When the valence is higher, so the track is more positive, the energy of the track is also higher. 
 
-### Chromagrams
+Also in the size of the dots there is a big difference. The dots of the lunch playlist are almost all relatively small, where the dots of the evening playlists are more divided. But, you can see that the loudness in the evening playlist seems to be higher. These three track based features show that the evening playlist scores higher in valence, energy and loudness. These were results I expected, because they fit in with the atmossphere created in a restaurants at these times of day. During lunch it is nice to have calmer, more quiet atmossphere. In the evening people like to be more energised and ready for the night ahead. For the next part I want to investigate 
+
+### Chromagrams distinct tracks
 
 ```{r lunch}
 bzt_lunch <-
@@ -230,7 +232,7 @@ I think this shows that timbre is bla bla and chroma bla bla bla.
 
 Nog bedenken
 
-### Tempo
+### Difference in tempo
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
@@ -383,7 +385,7 @@ For these visualizations I chose two songs that are very representative for the 
 
 I think you see very good that in the evening playlist, there is a lot more variation in the keys used. This could be explained by the lunch playlist being more calm and equal, so also the difference in keys being more equal.
 
-### Dendogram
+### Dendogram for the lunch playlist
 
 ```{r olifant}
 olifant <- 

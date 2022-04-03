@@ -124,13 +124,13 @@ ggplotly(plot_1)
 
 For the first plot, I put valence and energy on the axes. The size of the dots represent the loudness of the tracks. In the plot you can see that the tracks of the evening playlist are predominantly higher in energy, as I expected. The valence is also higher, so closer to the value 1. This means that the track are more positively in their nature. The lunch playlist is very linearly divided. In this playlist it seems that there is a connection between valence and energy. When the valence is higher, so the track is more positive, the energy of the track is also higher. 
 
-Also in the size of the dots there is a big difference. The dots of the lunch playlist are almost all relatively small, where the dots of the evening playlists are more divided. But, you can see that the loudness in the evening playlist seems to be higher. These three track based features show that the evening playlist scores higher in valence, energy and loudness. These were results I expected, because they fit in with the atmossphere created in a restaurants at these times of day. During lunch it is nice to have calmer, more quiet atmossphere. In the evening people like to be more energised and ready for the night ahead. For the next part I want to investigate 
+Also in the size of the dots there is a big difference. The dots of the lunch playlist are almost all relatively small, where the dots of the evening playlists are more divided. But, you can see that the loudness in the evening playlist seems to be higher. These three track based features show that the evening playlist scores higher in valence, energy and loudness. These were results I expected, because they fit in with the atmossphere created in a restaurants at these times of day. During lunch it is nice to have calmer, more quiet atmossphere. In the evening people like to be more energised and ready for the night ahead. For the next part I want to investigate chroma and timbre based features.
 
 ### Chromagrams distinct tracks
 
 ```{r lunch}
 bzt_lunch <-
-  get_tidy_audio_analysis("56IQUfsUskt9VHe6YM6kue") %>%
+  get_tidy_audio_analysis("4Hhv2vrOTy89HFRcjU3QOx") %>%
   compmus_align(bars, segments) %>%
   select(bars) %>%
   unnest(bars) %>%
@@ -174,7 +174,7 @@ chroma_lunch <- bind_rows(
   labs(x = "", y = "")
 
 bzt_dinner <-
-  get_tidy_audio_analysis("45Ia1U4KtIjAPPU7Wv1Sea") %>%
+  get_tidy_audio_analysis("0lO9vvpJdd2ZNAq61ga9wy") %>%
   compmus_align(bars, segments) %>%
   select(bars) %>%
   unnest(bars) %>%
@@ -218,15 +218,13 @@ chroma_dinner <- bind_rows(
   labs(x = "", y = "")
 
 ggarrange(chroma_lunch, chroma_dinner, 
-          labels = c("Lunch", "Dinner"),
+          labels = c("Lunch", "Evening"),
           ncol = 1, nrow = 2)
 ```
 
 ***
 
-Explanation
-
-I think this shows that timbre is bla bla and chroma bla bla bla.
+In these plots you can see chroma and timbre based features for a song of both playlists. I wanted to pick a random track, because the research is about the playlists in general. So all tracks are a representation of the atmosphere created by the playlist. I chose for both playlists the 5th track of the playlist. For the lunch playlist this is 'At last' from Etta James, for the evening playlist this is 'Doom and Gloom' from The Rolling Stones.
 
 ### Loudness
 

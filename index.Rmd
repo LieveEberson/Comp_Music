@@ -440,7 +440,7 @@ ggheatmap(
 
 For this dendogram I created an extra playlist. In this playlist I combined tracks from both playlist, 10 tracks of each. I want to investigate if these tracks will be clustered with tracks from the same playlist.
 
-Uitleg dendogram.
+In the heatmap there are
 
 # Conclusion
 

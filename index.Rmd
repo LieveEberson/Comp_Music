@@ -52,7 +52,7 @@ To investigate the differences I make use of a variation of visualisations and s
 
 # Analysis {.storyboard}
 
-### Comparing energy, valence and loudness
+### Comparing energy, valence and loudness of both playlists
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
@@ -233,7 +233,7 @@ For 'At last' the chroma based matrix does not show distinct changes. The timbre
 
 Altough these matrices may not show a lot of difference between the playlists, the instruments used do seem distinctive to me. The piano suits better with calmer, softer music as we saw in the lunch playlist on the previous page. The drums suit better with energetic, louder music like we saw in the evening playlist. However, all instruments fit with different tempos. That is why in the next part I am looking at the tempo of the playlists.
 
-### Difference in tempo
+### Looking at the difference in tempo
 
 ```{r}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
@@ -257,10 +257,10 @@ ggarrange(lunch_tempo, dinner_tempo,
 
 The histograms show the tempo of the tracks of the playlists for minor and major. You can see that in the evening playlist the tracks are predominantly in major. This fits with the findings regarding valence. The tracks are expected to be more positive and a major key is happier than a minor key. For the lunch playlist the tracks are more evenly divided, which corresponds with the findings regarding valence as well. 
 
-Tempo of the lunch playlist is found mostly around 100 bpm. The tempo of the evening playlist pushes it more to 140 bpm. This shows that the tempo of the tracks of the evening playlist seem to be generally higher than the lunch playlist. I think this fits well with the atmosspere during these times of day. When eating lunch, it is not nice to feel rushed. A lower tempo is more suitable. During the evening when having a beer, it is nice to get more hyped up and stay awake. A higher tempo supports this better. For the next part ??.
+Tempo of the lunch playlist is found mostly around 100 bpm. The tempo of the evening playlist pushes it more to 140 bpm. This shows that the tempo of the tracks of the evening playlist seem to be generally higher than the lunch playlist. I think this fits well with the atmosspere during these times of day. When eating lunch, it is not nice to feel rushed. A lower tempo is more suitable. During the evening when having a beer, it is nice to get more hyped up and stay awake. A higher tempo supports this better. For the next part I am going to look at clustering several tracks from the different playlists.
 
 
-### Dendogram for the lunch playlist
+### Trying to cluster tracks from different playlists based on Spotify features
 
 ```{r olifant}
 olifant <- 
@@ -316,7 +316,7 @@ The third cluster scores very high in energy and loudness. Compared to the other
 
 It seems like the dendogram clusters the tracks pretty good together based on their playlist. The features that seem most distinctive for this division are accousticness and energy. Energy was already looked at in the first step of the research. Accousticness however remains still an uninvestigated feature. Therefore I created a last page to take accousticness in account.
 
-### What is the role of accousticness in the playlists?
+### What is the role of acousticness in the playlists?
 
 ```{r, echo=FALSE}
 lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
@@ -342,4 +342,17 @@ The graphs show something I expected after the dendogram. Acousticness there was
 
 # Conclusion
 
-Wie heeft er baat bij: handvatten om de beste playlists te kunnnen maken voor momenten op de dag.
+## Column 1 {data-width = 600}
+
+### Findings
+
+After doing this research, I came out with several conclusions. The best features to classify tracks for a lunch or evening playlist are energy, loudness and accousticness. For energy and loudness the values in the evening playlist would be higher and in the lunch playlist lower. For acousticness this is the other way around. For further research I would use a classifier and see if these features indeed score the highest.
+
+## Column 2 {data-width = 400}
+
+### Contributions
+?
+
+### Thank you for reading my portfolio!
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4Hhv2vrOTy89HFRcjU3QOx?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>

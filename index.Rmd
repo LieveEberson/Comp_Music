@@ -259,131 +259,6 @@ The histograms show the tempo of the tracks of the playlists for minor and major
 
 Tempo of the lunch playlist is found mostly around 100 bpm. The tempo of the evening playlist pushes it more to 140 bpm. This shows that the tempo of the tracks of the evening playlist seem to be generally higher than the lunch playlist. I think this fits well with the atmosspere during these times of day. When eating lunch, it is not nice to feel rushed. A lower tempo is more suitable. During the evening when having a beer, it is nice to get more hyped up and stay awake. A higher tempo supports this better. For the next part ??.
 
-### Keygrams
-
-```{r}
-circshift <- function(v, n) {
-  if (n == 0) v else c(tail(v, n), head(v, -n))
-}
-major_key <-
-  c(6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88)
-minor_key <-
-  c(6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17)
-key_templates <-
-  tribble(
-    ~name, ~template,
-    "Gb:maj", circshift(major_key, 6),
-    "Bb:min", circshift(minor_key, 10),
-    "Db:maj", circshift(major_key, 1),
-    "F:min", circshift(minor_key, 5),
-    "Ab:maj", circshift(major_key, 8),
-    "C:min", circshift(minor_key, 0),
-    "Eb:maj", circshift(major_key, 3),
-    "G:min", circshift(minor_key, 7),
-    "Bb:maj", circshift(major_key, 10),
-    "D:min", circshift(minor_key, 2),
-    "F:maj", circshift(major_key, 5),
-    "A:min", circshift(minor_key, 9),
-    "C:maj", circshift(major_key, 0),
-    "E:min", circshift(minor_key, 4),
-    "G:maj", circshift(major_key, 7),
-    "B:min", circshift(minor_key, 11),
-    "D:maj", circshift(major_key, 2),
-    "F#:min", circshift(minor_key, 6),
-    "A:maj", circshift(major_key, 9),
-    "C#:min", circshift(minor_key, 1),
-    "E:maj", circshift(major_key, 4),
-    "G#:min", circshift(minor_key, 8),
-    "B:maj", circshift(major_key, 11),
-    "D#:min", circshift(minor_key, 3)
-  )
-keygram_lunch <- get_tidy_audio_analysis("1cuVNVugfiBag4geicsJZA") %>%
-  compmus_align(sections, segments) %>%
-  select(sections) %>%
-  unnest(sections) %>%
-  mutate(
-    pitches =
-      map(segments,
-        compmus_summarise, pitches,
-        method = "acentre", norm = "manhattan"
-      )
-  ) %>%
-  compmus_match_pitch_template(key_templates, "aitchison", "manhattan") %>%
-  ggplot(
-    aes(x = start + duration / 2, width = duration, y = name, fill = d)
-  ) +
-  geom_tile() +
-  scale_fill_viridis_c(option = "E", guide = "none") +
-  theme_minimal() +
-  labs(x = "Time (s)", y = "", fill = "Distance")
-
-circshift <- function(v, n) {
-  if (n == 0) v else c(tail(v, n), head(v, -n))
-}
-major_key <-
-  c(6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88)
-minor_key <-
-  c(6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17)
-key_templates <-
-  tribble(
-    ~name, ~template,
-    "Gb:maj", circshift(major_key, 6),
-    "Bb:min", circshift(minor_key, 10),
-    "Db:maj", circshift(major_key, 1),
-    "F:min", circshift(minor_key, 5),
-    "Ab:maj", circshift(major_key, 8),
-    "C:min", circshift(minor_key, 0),
-    "Eb:maj", circshift(major_key, 3),
-    "G:min", circshift(minor_key, 7),
-    "Bb:maj", circshift(major_key, 10),
-    "D:min", circshift(minor_key, 2),
-    "F:maj", circshift(major_key, 5),
-    "A:min", circshift(minor_key, 9),
-    "C:maj", circshift(major_key, 0),
-    "E:min", circshift(minor_key, 4),
-    "G:maj", circshift(major_key, 7),
-    "B:min", circshift(minor_key, 11),
-    "D:maj", circshift(major_key, 2),
-    "F#:min", circshift(minor_key, 6),
-    "A:maj", circshift(major_key, 9),
-    "C#:min", circshift(minor_key, 1),
-    "E:maj", circshift(major_key, 4),
-    "G#:min", circshift(minor_key, 8),
-    "B:maj", circshift(major_key, 11),
-    "D#:min", circshift(minor_key, 3)
-  )
-keygram_dinner <- get_tidy_audio_analysis("1EXrFPfVNVsyb32yapebbM") %>%
-  compmus_align(sections, segments) %>%
-  select(sections) %>%
-  unnest(sections) %>%
-  mutate(
-    pitches =
-      map(segments,
-        compmus_summarise, pitches,
-        method = "acentre", norm = "manhattan"
-      )
-  ) %>%
-  compmus_match_pitch_template(key_templates, "aitchison", "manhattan") %>%
-  ggplot(
-    aes(x = start + duration / 2, width = duration, y = name, fill = d)
-  ) +
-  geom_tile() +
-  scale_fill_viridis_c(option = "E", guide = "none") +
-  theme_minimal() +
-  labs(x = "Time (s)", y = "", fill = "Distance")
-
-ggarrange(keygram_lunch, keygram_dinner, 
-          labels = c("Lunch", "Evening"),
-          ncol = 1, nrow = 2)
-
-```
-
-***
-
-For these visualizations I chose again two random tracks. This time I picked the track 5th from the bottom. For the lunch playlist this is 'Window Seat' from Erykah Badu. For the evening playlist this is 'Our House' from Madness, however this track is 8 minutes long. So for practicality I picked the 6th track. 
-
-Uitleg keygrams.
-
 
 ### Dendogram for the lunch playlist
 
@@ -435,7 +310,35 @@ ggheatmap(
 
 For this dendogram I created an extra playlist. In this playlist I combined tracks from both playlist, 10 tracks of each. I want to investigate if these tracks will be clustered with tracks from the same playlist.
 
-In the heatmap there are three clusters to be found. The first has higher values in A and lower in accousticness. The second cluster is harder to determine. 
+In the heatmap there are four clusters to be found and three loose tracks. The first cluster scores low in instrumentalness and high in valence and accousticness. This cluster exists of three tracks from the lunch playlist. The second cluster scores higher in danceability and valence. This cluster exists of 4 tracks from the lunch playlist and 1 from the evening playlist. The first two clusters are also clustered together higher up.
+
+The third cluster scores very high in energy and loudness. Compared to the other clusters it scores lower on accousticness and a bit higher in tempo and valence. The cluster entails 4 tracks from the evening playlist and 1 from the lunch playlist. The last cluster has higher values for speechiness and loudness, and lower values for accousticness. This cluster has 2 tracks of the evening playlist and 1 of the lunch playlist. The third and fourth cluster are clustered together higher up.
+
+It seems like the dendogram clusters the tracks pretty good together based on their playlist. The features that seem most distinctive for this division are accousticness and energy. Energy was already looked at in the first step of the research. Accousticness however remains still an uninvestigated feature. Therefore I created a last page to take accousticness in account.
+
+### What is the role of accousticness in the playlists?
+
+```{r, echo=FALSE}
+lunch <- get_playlist_audio_features("","15XTzdCk80I6KrHwrRgR0L")
+dinner <- get_playlist_audio_features("", "7fLp6h0KxTCnNWsbBpSWXi")
+bar_playlists <-
+  bind_rows(
+    lunch %>% mutate(category = "Lunch"),
+    dinner %>% mutate(category = "Evening"))
+
+plot2 <- bar_playlists %>%
+  ggplot(aes(x = acousticness)) +
+  geom_density( alpha= 0.5, fill = "#f3ff33") +
+  facet_wrap(~category) +
+  theme_bw() +
+  labs( x ="Accousticness",
+  title = "Comparing accousticness for playlists")
+ggplotly(plot2)
+```
+
+***
+
+The graphs show something I expected after the dendogram. Acousticness there was higher for the clusters with more tracks from the lunch playlist, and lower for the clusters with tracks from the evening playlist. Here we can see that there is a high density around lower values for acousticness for the evening playlist. However, the density for the lunch playlist is more evenly spread. So the difference in accousticness is more based on the absence of acousticness in the evening playlist than a big presence of acousticness in the lunch playlist.
 
 # Conclusion
 

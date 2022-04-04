@@ -348,6 +348,8 @@ The graphs show something I expected after the dendogram. Acousticness there was
 
 After doing this research, I came out with several conclusions. The best features to classify tracks for a lunch or evening playlist are energy, loudness and accousticness. For energy and loudness the values in the evening playlist would be higher and in the lunch playlist lower. For acousticness this is the other way around. For further research I would use a classifier and see if these features indeed score the highest.
 
+What can we now do with these results? Working at the bar for a year now, the playlists used can grow a little old. However, I do not take the time to create new playlists. With the knowledge acquired, I could try to use a computer program to create these new playlists based on the features found. 
+
 ## Column 2 {data-width = 400}
 
 ### Contributions

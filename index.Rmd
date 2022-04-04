@@ -32,11 +32,13 @@ library(ggpubr)
 
 ### Corpus
 
-Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Working in a cafe myself, I use a lot of spotify playlists. In this cafe we have different playlists for different moments of the day. For my corpus in this research I chose our lunchtime and after dinnertime playlists. I want to find out what aspects of this music makes them more enjoyable on different parts of the day. For this I will compare these two playlists with each other. Beforehand, I would expect differences mostly in the tempo and energy of the tracks. Looking at valence, I would expect more neutral or a bit more negative songs for the lunch playlists. For the evening playlist I would expect the songs to be a bit more positive, because during this time people are drinking more alcohol and maybe going to a party afterwards.
+Sitting in a cafe or restaurant, music has a big influence on the atmosphere. Working in a cafe myself, I use a lot of spotify playlists. In this cafe we have different playlists for different moments of the day. For my corpus in this research I chose our lunchtime and after dinnertime playlists. I want to find out what aspects of this music makes them more enjoyable on different parts of the day. For this I will compare these two playlists with each other.
 
-- beschrijven van verschillen tussen playists. En verwachte verschillen.
+Looking at the playlist there is already a clear difference: the genres. In the lunch playlist you can find mostly tracks of the genres soul, jazz and folk. The evening playlist consists most of tracks from the rock genre. The evening playlist consists of 160 tracks, where the lunchplaylist consists of 99 tracks. However, I feel like there are enough tracks to be able to find some results and compare the two playlists. 
 
-To investigate the differences I make use of a variation of visualisations and spotify features. First I will visualize track-level features for songs in both playlists. Secondly I will analyse the chroma features of both playlists by using chromagrams. 
+Beforehand, I would expect differences mostly in the tempo and energy of the tracks. Looking at valence, I would expect more neutral or a bit more negative songs for the lunch playlists. For the evening playlist I would expect the songs to be a bit more positive, because during this time people are drinking more alcohol and maybe going to a party afterwards. 
+
+To investigate the differences I make use of a variation of visualisations and spotify features. First I will visualize track-level features for songs in both playlists. Secondly I will analyse the chroma and timbre features of both playlists by using self similarity matrices. Then I will look at the tempo, see if tracks from both playlists will be clustered together and lastly compare the acousticness of both playlists. 
 
 
 ## Column 2 {data-width = 350}
@@ -346,15 +348,18 @@ The graphs show something I expected after the dendogram. Acousticness there was
 
 ### Findings
 
-After doing this research, I came out with several conclusions. The best features to classify tracks for a lunch or evening playlist are energy, loudness and accousticness. For energy and loudness the values in the evening playlist would be higher and in the lunch playlist lower. For acousticness this is the other way around. For further research I would use a classifier and see if these features indeed score the highest.
+After doing this research, I came out with several conclusions. The best features to classify tracks for a lunch or evening playlist are energy, loudness and accousticness. For energy and loudness the values in the evening playlist would be higher and in the lunch playlist lower. For acousticness this is the other way around. Thinking of the atmossphere that the playlists are created for these features fit well. When I think of accoustic tracks, this fits better to a calm and cozy sphere. This is what we try to create during lunch. Energy and loudness fit with an evening playlist. People at a bar like to get more energized in the evening, which is helped by the features energy and loudness. For further research I would use a classifier and see if these features indeed score the highest.
 
-What can we now do with these results? Working at the bar for a year now, the playlists used can grow a little old. However, I do not take the time to create new playlists. With the knowledge acquired, I could try to use a computer program to create these new playlists based on the features found. 
+Not to forget is the tempo feature. Having a meal is a time that we do not like to be rushed at. This also showed in the tempo findings, where the tracks from the lunch playlist score lower. In the evening again, it is nice to be energized. A higher tempo can help with this. In the evening playlist the ratio leaned more to high tempo tracks.
+
+What can we now do with these results? Working at the bar for a year now, the playlists used can grow a little old. However, I do not take the time to create new playlists. With the knowledge acquired, I could try to use a computer program to create these new playlists based on the features found. It could find tracks fitting to the feature profile and differences and divide tracks between a lunch- and evening playlist.
 
 ## Column 2 {data-width = 400}
 
-### Contributions
-?
+### This was the end
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4Hhv2vrOTy89HFRcjU3QOx?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 ### Thank you for reading my portfolio!
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4Hhv2vrOTy89HFRcjU3QOx?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/72ahyckBJfTigJCFCviVN7?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
